@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Questionario Sport Inclusivo</title>
+
+<style>
+
+body{
+font-family:Arial, sans-serif;
+background:#f4f6f9;
+margin:0;
+padding:30px;
+}
+
+.container{
+
+max-width:1000px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:12px;
+box-shadow:0 0 15px rgba(0,0,0,.1);
+
+}
+
+h1{
+color:#1d4e89;
+}
+
+h2{
+
+margin-top:40px;
+color:#2c3e50;
+
+}
+
+.question{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin:5px 0;
+}
+
+table{
+
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+
+}
+
+th,td{
+
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+
+}
+
+th{
+background:#1d4e89;
+color:white;
+}
+
+textarea{
+
+width:100%;
+height:100px;
+padding:10px;
+
+}
+
+button{
+
+margin-top:30px;
+background:#1d4e89;
+color:white;
+border:none;
+padding:15px 30px;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+
+}
+
+button:hover{
+background:#15406f;
+}
+
+.progress{
+
+height:12px;
+background:#ddd;
+border-radius:20px;
+overflow:hidden;
+margin-bottom:30px;
+
+}
+
+.bar{
+
+width:100%;
+height:100%;
+background:#3aa657;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Questionario</h1>
+
+<p>
+Percezione dei benefici educativi, sociali e motori dei programmi sportivi a finalità inclusiva
+</p>
+
+<div class="progress">
+<div class="bar"></div>
+</div>
+
+<form id="survey">
+
+<h2>Sezione A – Informazioni socio-professionali</h2>
+
+<div class="question">
+
+<label>Età</label>
+
+<select name="eta" required>
+
+<option value="">Seleziona</option>
+<option>18–25 anni</option>
+<option>26–35 anni</option>
+<option>36–45 anni</option>
+<option>Oltre 45 anni</option>
+
+</select>
+
+</div>
+
+<div class="question">
+
+<label>Genere</label>
+
+<label><input type="radio" name="genere" value="Maschio" required> Maschio</label>
+
+<label><input type="radio" name="genere" value="Femmina"> Femmina</label>
+
+<label><input type="radio" name="genere" value="Preferisco non rispondere">
+Preferisco non rispondere</label>
+
+</div>
+
+<div class="question">
+
+<label>Ruolo professionale</label>
+
+<select name="ruolo">
+
+<option>Istruttore sportivo</option>
+<option>Educatore</option>
+<option>Coordinatore</option>
+<option>Psicologo</option>
+<option>Operatore sociale</option>
+<option>Altro</option>
+
+</select>
+
+</div>
+
+<div class="question">
+
+<label>Anni di esperienza</label>
+
+<select name="esperienza">
+
+<option>Meno di 1 anno</option>
+<option>1–3 anni</option>
+<option>4–6 anni</option>
+<option>Più di 6 anni</option>
+
+</select>
+
+</div>
+
+<div class="question">
+
+<label>Età prevalente dei partecipanti</label>
+
+<select name="fascia">
+
+<option>6–10 anni</option>
+<option>11–14 anni</option>
+<option>15–18 anni</option>
+<option>Oltre 18 anni</option>
+
+</select>
+
+</div>
+
+<h2>Sezione B – Benefici percepiti</h2>
+
+<p>
+1 = Per niente | 5 = Moltissimo
+</p>
+
+<table>
+
+<tr>
+<th>Affermazione</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+
+<script>
+
+const items=[
+
+"B1 Inclusione sociale",
+"B2 Autostima",
+"B3 Competenze relazionali",
+"B4 Rispetto delle regole",
+"B5 Collaborazione",
+"B6 Benessere psicologico",
+"B7 Riduzione comportamenti problematici",
+"B8 Senso di appartenenza",
+"B9 Integrazione culturale",
+"B10 Benessere fisico"
+
+];
+
+document.write(
+
+items.map((item,i)=>`
+
+<tr>
+
+<td>${item}</td>
+
+${[1,2,3,4,5].map(v=>`
+
+<td>
+
+<input type="radio"
+name="B${i+1}"
+value="${v}"
+required>
+
+</td>
+
+`).join("")}
+
+</tr>
+
+`).join("")
+
+);
+
+</script>
+
+</table>
+
+
+<h2>Sezione C – Valutazione del modello educativo</h2>
+
+<p>
+1 = Per niente | 5 = Moltissimo
+</p>
+
+<table>
+
+<tr>
+<th>Affermazione</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+
+<tr>
+<td>Efficacia dello sport come strumento educativo</td>
+
+<td><input type="radio" name="C1" value="1" required></td>
+<td><input type="radio" name="C1" value="2"></td>
+<td><input type="radio" name="C1" value="3"></td>
+<td><input type="radio" name="C1" value="4"></td>
+<td><input type="radio" name="C1" value="5"></td>
+
+</tr>
+
+<tr>
+<td>Importanza del lavoro multidisciplinare</td>
+
+<td><input type="radio" name="C2" value="1" required></td>
+<td><input type="radio" name="C2" value="2"></td>
+<td><input type="radio" name="C2" value="3"></td>
+<td><input type="radio" name="C2" value="4"></td>
+<td><input type="radio" name="C2" value="5"></td>
+
+</tr>
+
+<tr>
+<td>Contributo alla prevenzione del disagio giovanile</td>
+
+<td><input type="radio" name="C3" value="1" required></td>
+<td><input type="radio" name="C3" value="2"></td>
+<td><input type="radio" name="C3" value="3"></td>
+<td><input type="radio" name="C3" value="4"></td>
+<td><input type="radio" name="C3" value="5"></td>
+
+</tr>
+
+<tr>
+
+<td>Benefici duraturi nel tempo</td>
+
+<td><input type="radio" name="C4" value="1" required></td>
+<td><input type="radio" name="C4" value="2"></td>
+<td><input type="radio" name="C4" value="3"></td>
+<td><input type="radio" name="C4" value="4"></td>
+<td><input type="radio" name="C4" value="5"></td>
+
+</tr>
+
+</table>
+<h2>Sezione D – Domande aperte</h2>
+
+<label>Principali cambiamenti osservati</label>
+
+<textarea name="D1"></textarea>
+
+<label>Punto di forza del progetto</label>
+
+<textarea name="D2"></textarea>
+
+<label>Aspetti da migliorare</label>
+
+<textarea name="D3"></textarea>
+
+<label>Ulteriori considerazioni</label>
+
+<textarea name="D4"></textarea>
+
+<button type="submit">
+
+Invia questionario
+
+</button>
+
+</form>
+
+</div>
+
+<script>
+
+document.getElementById("survey")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+alert("Questionario inviato con successo.");
+
+});
+
+</script>
+
+</body>
+
+</html>
