@@ -216,7 +216,7 @@
 <div class="container">
 
     <h1>Karate e sviluppo educativo nei giovani</h1>
-    <p class="subtitle">Questionario Anonimo, Grazie per la collaborazione!</p>
+    <p class="subtitle">Questionario Anonimo. Grazie per la collaborazione!</p>
 
     <form id="surveyForm" method="POST" action="https://script.google.com/macros/s/AKfycbzSNf5RXeFjYSJK3pYtR69TWdBCvZeed7DUtdPmd0QAYfdh-v5K1Tj3cDJU9RYaX8m5/exec">
 
@@ -533,7 +533,6 @@
             sec.classList.remove('hidden');
         } else {
             sec.classList.add('hidden');
-            // Uncheck tutti i radio/checkbox all'interno della sezione nascosta
             const inputs = sec.querySelectorAll('input');
             inputs.forEach(input => {
                 if(input.type === 'checkbox' || input.type === 'radio') input.checked = false;
