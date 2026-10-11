@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Questionario Sport Inclusivo</title>
+<title>Questionario Anonimo - Karate e Sviluppo Educativo</title>
 
 <style>
     /* STILI GLOBALI E MODERNI */
@@ -57,16 +57,46 @@
         font-size: 22px;
     }
 
-    label {
+    .question-title {
         font-weight: 600;
-        display: block;
-        margin-top: 20px;
-        margin-bottom: 8px;
+        margin-top: 25px;
+        margin-bottom: 10px;
         color: var(--text-main);
+        display: block;
     }
 
-    /* INPUT, SELECT E TEXTAREA */
-    select, textarea, input[type="text"] {
+    .instruction {
+        font-size: 14px;
+        color: var(--text-muted);
+        margin-top: -5px;
+        margin-bottom: 12px;
+    }
+
+    /* CAMPI DI INPUT E SELEZIONE */
+    .option-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .option-label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: normal;
+        cursor: pointer;
+        padding: 6px 0;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+        accent-color: var(--primary-color);
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    textarea, input[type="text"] {
         width: 100%;
         padding: 14px;
         border-radius: 8px;
@@ -78,7 +108,7 @@
         box-sizing: border-box;
     }
 
-    select:focus, textarea:focus, input[type="text"]:focus {
+    textarea:focus, input[type="text"]:focus {
         outline: none;
         border-color: var(--primary-color);
         background-color: #fff;
@@ -90,21 +120,7 @@
         min-height: 100px;
     }
 
-    /* ANIMAZIONE CAMPO "ALTRO" */
-    .hidden-box {
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
-    }
-
-    .hidden-box.show {
-        max-height: 100px; /* Abbastanza alto da contenere l'input */
-        opacity: 1;
-        margin-top: 10px;
-    }
-
-    /* TABELLE LIKERT (Responsive) */
+    /* TABELLE LIKERT */
     .table-responsive {
         overflow-x: auto;
         border-radius: 8px;
@@ -150,12 +166,13 @@
         background-color: #fbfbfb;
     }
 
-    /* RADIO BUTTONS CUSTOM */
-    input[type="radio"] {
-        accent-color: var(--primary-color);
-        width: 18px;
-        height: 18px;
-        cursor: pointer;
+    /* SEZIONE CONDIZIONALE */
+    .conditional-section {
+        transition: all 0.4s ease;
+    }
+
+    .hidden {
+        display: none;
     }
 
     /* PULSANTE SUBMIT */
@@ -183,7 +200,6 @@
         transform: translateY(0);
     }
 
-    /* ADATTAMENTO MOBILE */
     @media (max-width: 600px) {
         .container {
             padding: 30px 20px;
@@ -199,149 +215,310 @@
 
 <div class="container">
 
-    <h1>Questionario Sport Inclusivo</h1>
-    <p class="subtitle">Aiutaci a migliorare compilando questo breve questionario.</p>
+    <h1>Questionario Anonimo</h1>
+    <p class="subtitle">Karate e sviluppo educativo nei giovani. Grazie per la collaborazione!</p>
 
     <form id="surveyForm" method="POST" action="https://script.google.com/macros/s/AKfycbzSNf5RXeFjYSJK3pYtR69TWdBCvZeed7DUtdPmd0QAYfdh-v5K1Tj3cDJU9RYaX8m5/exec">
 
-        <input type="hidden" name="genere" id="genere_final">
-        <input type="hidden" name="ruolo" id="ruolo_final">
+        <!-- SEZIONE A -->
+        <h2>SEZIONE A — PROFILO DEL PARTECIPANTE</h2>
 
-        <h2>Sezione A – Informazioni</h2>
-
-        <label>Età</label>
-        <select name="eta" required>
-            <option value="" disabled selected>Seleziona un'opzione...</option>
-            <option value="18–25">18–25</option>
-            <option value="26–35">26–35</option>
-            <option value="36–45">36–45</option>
-            <option value="Oltre 45">Oltre 45</option>
-        </select>
-
-        <label>Genere</label>
-        <select id="genere_select" required>
-            <option value="" disabled selected>Seleziona il genere...</option>
-            <option value="Maschio">Maschio</option>
-            <option value="Femmina">Femmina</option>
-            <option value="Altro">Altro</option>
-        </select>
-        <div class="hidden-box" id="genere_altro_box">
-            <input type="text" id="genere_altro_input" placeholder="Specifica il tuo genere...">
+        <span class="question-title">1. Qual è il tuo ruolo principale?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q1" value="Istruttore/allenatore di karate" required> Istruttore/allenatore di karate</label>
+            <label class="option-label"><input type="radio" name="Q1" value="Praticante adulto di karate"> Praticante adulto di karate</label>
+            <label class="option-label"><input type="radio" name="Q1" value="Sia istruttore sia praticante"> Sia istruttore sia praticante</label>
         </div>
 
-        <label>Ruolo</label>
-        <select id="ruolo_select" required>
-            <option value="" disabled selected>Seleziona il tuo ruolo...</option>
-            <option value="Istruttore">Istruttore</option>
-            <option value="Educatore">Educatore</option>
-            <option value="Psicologo">Psicologo</option>
-            <option value="Operatore sociale">Operatore sociale</option>
-            <option value="Altro">Altro (Specifica)</option>
-        </select>
-        <div class="hidden-box" id="ruolo_altro_box">
-            <input type="text" id="ruolo_altro_input" placeholder="Qual è il tuo ruolo?">
+        <span class="question-title">2. Da quanti anni pratichi karate o lavori nell’insegnamento del karate?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q2" value="Meno di 2 anni" required> Meno di 2 anni</label>
+            <label class="option-label"><input type="radio" name="Q2" value="Da 2 a 5 anni"> Da 2 a 5 anni</label>
+            <label class="option-label"><input type="radio" name="Q2" value="Da 6 a 10 anni"> Da 6 a 10 anni</label>
+            <label class="option-label"><input type="radio" name="Q2" value="Oltre 10 anni"> Oltre 10 anni</label>
         </div>
 
-        <label>Esperienza</label>
-        <select name="esperienza" required>
-            <option value="" disabled selected>Seleziona anni di esperienza...</option>
-            <option value="<1 anno">&lt;1 anno</option>
-            <option value="1–3 anni">1–3 anni</option>
-            <option value="4–6 anni">4–6 anni</option>
-            <option value=">6 anni">&gt;6 anni</option>
-        </select>
+        <span class="question-title">3. Hai esperienza diretta con bambini o adolescenti durante le attività di karate?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q3" value="Sì, attualmente" required> Sì, attualmente</label>
+            <label class="option-label"><input type="radio" name="Q3" value="Sì, in passato"> Sì, in passato</label>
+            <label class="option-label"><input type="radio" name="Q3" value="No"> No</label>
+        </div>
 
-        <label>Fascia partecipanti</label>
-        <select name="fascia" required>
-            <option value="" disabled selected>Seleziona fascia d'età partecipanti...</option>
-            <option value="6–10">6–10</option>
-            <option value="11–14">11–14</option>
-            <option value="15–18">15–18</option>
-            <option value="18+">18+</option>
-        </select>
+        <span class="question-title">4. Con quali fasce d’età hai avuto esperienza diretta?</span>
+        <p class="instruction">Puoi selezionare più risposte.</p>
+        <div class="option-group">
+            <label class="option-label"><input type="checkbox" name="Q4[]" value="5–7 anni"> 5–7 anni</label>
+            <label class="option-label"><input type="checkbox" name="Q4[]" value="8–11 anni"> 8–11 anni</label>
+            <label class="option-label"><input type="checkbox" name="Q4[]" value="12–14 anni"> 12–14 anni</label>
+            <label class="option-label"><input type="checkbox" name="Q4[]" value="15–17 anni"> 15–17 anni</label>
+            <label class="option-label"><input type="checkbox" name="Q4[]" value="Nessuna esperienza diretta con minori"> Nessuna esperienza diretta con minori</label>
+        </div>
 
-        <h2>Sezione B – Benefici percepiti</h2>
+        <!-- SEZIONE B -->
+        <h2>SEZIONE B — STRATEGIE DIDATTICHE</h2>
+        <p class="instruction">Le domande seguenti riguardano l’esperienza nell’insegnamento ai giovani. Se non insegni karate a bambini o adolescenti, puoi rispondere sulla base di ciò che conosci direttamente, oppure selezionare “Non so valutare”.</p>
+        
+        <span class="question-title">5. Quanto ritieni importanti le seguenti strategie nella didattica del karate?</span>
+        <p class="instruction">1 = Per nulla importante · 2 = Poco · 3 = Abbastanza · 4 = Molto · 5 = Fondamentale · N = Non so valutare</p>
         <div class="table-responsive">
             <table>
                 <tr>
-                    <th>Item</th>
-                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
-                </tr>
-                <script>
-                    const Bitems = [
-                        "Inclusione sociale", "Autostima", "Relazioni", "Regole", 
-                        "Collaborazione", "Benessere psicologico", "Riduzione problemi", 
-                        "Senso appartenenza", "Integrazione culturale", "Benessere fisico"
-                    ];
-                    document.write(
-                        Bitems.map((t, i) =>
-                            `<tr>
-                                <td>${t}</td>
-                                ${[1, 2, 3, 4, 5].map(v =>
-                                    `<td><input type="radio" name="B${i + 1}" value="${v}" required></td>`
-                                ).join("")}
-                            </tr>`
-                        ).join("")
-                    );
-                </script>
-            </table>
-        </div>
-
-        <h2>Sezione C – Valutazione</h2>
-        <div class="table-responsive">
-            <table>
-                <tr>
-                    <th>Item</th>
-                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                    <th>Strategia</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>N</th>
                 </tr>
                 <tr>
-                    <td>Efficacia sport educativo</td>
-                    <td><input type="radio" name="C1" value="1" required></td>
-                    <td><input type="radio" name="C1" value="2"></td>
-                    <td><input type="radio" name="C1" value="3"></td>
-                    <td><input type="radio" name="C1" value="4"></td>
-                    <td><input type="radio" name="C1" value="5"></td>
+                    <td>Spiegare e condividere le regole di comportamento</td>
+                    <td><input type="radio" name="Q5_1" value="1" required></td><td><input type="radio" name="Q5_1" value="2"></td><td><input type="radio" name="Q5_1" value="3"></td><td><input type="radio" name="Q5_1" value="4"></td><td><input type="radio" name="Q5_1" value="5"></td><td><input type="radio" name="Q5_1" value="N"></td>
                 </tr>
                 <tr>
-                    <td>Multidisciplinarietà</td>
-                    <td><input type="radio" name="C2" value="1" required></td>
-                    <td><input type="radio" name="C2" value="2"></td>
-                    <td><input type="radio" name="C2" value="3"></td>
-                    <td><input type="radio" name="C2" value="4"></td>
-                    <td><input type="radio" name="C2" value="5"></td>
+                    <td>Insegnare il controllo del gesto e l’uso responsabile della forza</td>
+                    <td><input type="radio" name="Q5_2" value="1" required></td><td><input type="radio" name="Q5_2" value="2"></td><td><input type="radio" name="Q5_2" value="3"></td><td><input type="radio" name="Q5_2" value="4"></td><td><input type="radio" name="Q5_2" value="5"></td><td><input type="radio" name="Q5_2" value="N"></td>
                 </tr>
                 <tr>
-                    <td>Prevenzione disagio</td>
-                    <td><input type="radio" name="C3" value="1" required></td>
-                    <td><input type="radio" name="C3" value="2"></td>
-                    <td><input type="radio" name="C3" value="3"></td>
-                    <td><input type="radio" name="C3" value="4"></td>
-                    <td><input type="radio" name="C3" value="5"></td>
+                    <td>Aiutare i ragazzi a gestire frustrazione e rabbia</td>
+                    <td><input type="radio" name="Q5_3" value="1" required></td><td><input type="radio" name="Q5_3" value="2"></td><td><input type="radio" name="Q5_3" value="3"></td><td><input type="radio" name="Q5_3" value="4"></td><td><input type="radio" name="Q5_3" value="5"></td><td><input type="radio" name="Q5_3" value="N"></td>
                 </tr>
                 <tr>
-                    <td>Benefici duraturi</td>
-                    <td><input type="radio" name="C4" value="1" required></td>
-                    <td><input type="radio" name="C4" value="2"></td>
-                    <td><input type="radio" name="C4" value="3"></td>
-                    <td><input type="radio" name="C4" value="4"></td>
-                    <td><input type="radio" name="C4" value="5"></td>
+                    <td>Valorizzare i progressi individuali, evitando confronti umilianti</td>
+                    <td><input type="radio" name="Q5_4" value="1" required></td><td><input type="radio" name="Q5_4" value="2"></td><td><input type="radio" name="Q5_4" value="3"></td><td><input type="radio" name="Q5_4" value="4"></td><td><input type="radio" name="Q5_4" value="5"></td><td><input type="radio" name="Q5_4" value="N"></td>
+                </tr>
+                <tr>
+                    <td>Favorire collaborazione, rispetto e sostegno tra compagni</td>
+                    <td><input type="radio" name="Q5_5" value="1" required></td><td><input type="radio" name="Q5_5" value="2"></td><td><input type="radio" name="Q5_5" value="3"></td><td><input type="radio" name="Q5_5" value="4"></td><td><input type="radio" name="Q5_5" value="5"></td><td><input type="radio" name="Q5_5" value="N"></td>
+                </tr>
+                <tr>
+                    <td>Adattare esercizi e comunicazione alle necessità dei singoli ragazzi</td>
+                    <td><input type="radio" name="Q5_6" value="1" required></td><td><input type="radio" name="Q5_6" value="2"></td><td><input type="radio" name="Q5_6" value="3"></td><td><input type="radio" name="Q5_6" value="4"></td><td><input type="radio" name="Q5_6" value="5"></td><td><input type="radio" name="Q5_6" value="N"></td>
                 </tr>
             </table>
         </div>
 
-        <h2>Sezione D – Domande aperte</h2>
+        <!-- SEZIONE C -->
+        <h2>SEZIONE C — SVILUPPO MOTORIO, EMOTIVO E COMPORTAMENTALE</h2>
 
-        <label>Cambiamenti osservati</label>
-        <textarea name="D1" placeholder="Scrivi qui..."></textarea>
+        <span class="question-title">6. In base alla tua esperienza diretta, quali cambiamenti hai osservato nei giovani che praticano karate con continuità?</span>
+        <p class="instruction">1 = Mai · 2 = Raramente · 3 = Talvolta · 4 = Spesso · 5 = Molto spesso · N = Non ho esperienza sufficiente per valutare</p>
+        <div class="table-responsive">
+            <table>
+                <tr>
+                    <th>Aspetto</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>N</th>
+                </tr>
+                <tr>
+                    <td>Coordinazione, equilibrio e controllo motorio</td>
+                    <td><input type="radio" name="Q6_1" value="1" required></td><td><input type="radio" name="Q6_1" value="2"></td><td><input type="radio" name="Q6_1" value="3"></td><td><input type="radio" name="Q6_1" value="4"></td><td><input type="radio" name="Q6_1" value="5"></td><td><input type="radio" name="Q6_1" value="N"></td>
+                </tr>
+                <tr>
+                    <td>Capacità di gestire frustrazione e rabbia</td>
+                    <td><input type="radio" name="Q6_2" value="1" required></td><td><input type="radio" name="Q6_2" value="2"></td><td><input type="radio" name="Q6_2" value="3"></td><td><input type="radio" name="Q6_2" value="4"></td><td><input type="radio" name="Q6_2" value="5"></td><td><input type="radio" name="Q6_2" value="N"></td>
+                </tr>
+                <tr>
+                    <td>Capacità di rispettare regole e indicazioni</td>
+                    <td><input type="radio" name="Q6_3" value="1" required></td><td><input type="radio" name="Q6_3" value="2"></td><td><input type="radio" name="Q6_3" value="3"></td><td><input type="radio" name="Q6_3" value="4"></td><td><input type="radio" name="Q6_3" value="5"></td><td><input type="radio" name="Q6_3" value="N"></td>
+                </tr>
+                <tr>
+                    <td>Capacità di controllare gli impulsi e il gesto</td>
+                    <td><input type="radio" name="Q6_4" value="1" required></td><td><input type="radio" name="Q6_4" value="2"></td><td><input type="radio" name="Q6_4" value="3"></td><td><input type="radio" name="Q6_4" value="4"></td><td><input type="radio" name="Q6_4" value="5"></td><td><input type="radio" name="Q6_4" value="N"></td>
+                </tr>
+                <tr>
+                    <td>Collaborazione e rispetto dei compagni</td>
+                    <td><input type="radio" name="Q6_5" value="1" required></td><td><input type="radio" name="Q6_5" value="2"></td><td><input type="radio" name="Q6_5" value="3"></td><td><input type="radio" name="Q6_5" value="4"></td><td><input type="radio" name="Q6_5" value="5"></td><td><input type="radio" name="Q6_5" value="N"></td>
+                </tr>
+                <tr>
+                    <td>Fiducia in sé e partecipazione al gruppo</td>
+                    <td><input type="radio" name="Q6_6" value="1" required></td><td><input type="radio" name="Q6_6" value="2"></td><td><input type="radio" name="Q6_6" value="3"></td><td><input type="radio" name="Q6_6" value="4"></td><td><input type="radio" name="Q6_6" value="5"></td><td><input type="radio" name="Q6_6" value="N"></td>
+                </tr>
+            </table>
+        </div>
 
-        <label>Punti di forza</label>
-        <textarea name="D2" placeholder="Scrivi qui..."></textarea>
+        <span class="question-title">7. Hai avuto esperienza diretta con ragazzi che manifestavano difficoltà di autocontrollo, conflitti frequenti, aggressività o difficoltà relazionali?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q7" value="Sì" required onclick="toggleGroup7(true)"> Sì</label>
+            <label class="option-label"><input type="radio" name="Q7" value="No" onclick="toggleGroup7(false)"> No</label>
+            <label class="option-label"><input type="radio" name="Q7" value="Preferisco non rispondere" onclick="toggleGroup7(false)"> Preferisco non rispondere</label>
+        </div>
 
-        <label>Miglioramenti</label>
-        <textarea name="D3" placeholder="Scrivi qui..."></textarea>
+        <!-- DOMANDE CONDIZIONALI 8 E 9 -->
+        <div id="section_8_9" class="conditional-section hidden">
+            <span class="question-title">8. Se hai risposto sì, quali difficoltà hai incontrato?</span>
+            <p class="instruction">Puoi selezionare più risposte.</p>
+            <div class="option-group">
+                <label class="option-label"><input type="checkbox" name="Q8[]" value="Difficoltà nel rispettare le regole"> Difficoltà nel rispettare le regole</label>
+                <label class="option-label"><input type="checkbox" name="Q8[]" value="Reazioni impulsive o difficoltà nella gestione della rabbia"> Reazioni impulsive o difficoltà nella gestione della rabbia</label>
+                <label class="option-label"><input type="checkbox" name="Q8[]" value="Conflitti con i compagni"> Conflitti con i compagni</label>
+                <label class="option-label"><input type="checkbox" name="Q8[]" value="Difficoltà a collaborare o a sentirsi parte del gruppo"> Difficoltà a collaborare o a sentirsi parte del gruppo</label>
+                <label class="option-label"><input type="checkbox" name="Q8[]" value="Scarsa fiducia in sé o difficoltà a partecipare"> Scarsa fiducia in sé o difficoltà a partecipare</label>
+                <label class="option-label"><input type="checkbox" id="q8_altro_check" name="Q8[]" value="Altro"> Altro:</label>
+                <input type="text" id="q8_altro_text" name="Q8_altro" placeholder="Specifica le difficoltà..." style="margin-top: 5px;">
+                <label class="option-label"><input type="checkbox" name="Q8[]" value="Preferisco non specificare"> Preferisco non specificare</label>
+            </div>
 
-        <label>Altro (Note finali)</label>
-        <textarea name="D4" placeholder="Scrivi qui eventuali note aggiuntive..."></textarea>
+            <span class="question-title">9. In uno o più casi seguiti direttamente, hai notato cambiamenti positivi dopo un periodo di pratica del karate?</span>
+            <div class="option-group">
+                <label class="option-label"><input type="radio" name="Q9" value="Sì, cambiamenti evidenti"> Sì, cambiamenti evidenti</label>
+                <label class="option-label"><input type="radio" name="Q9" value="Sì, cambiamenti limitati"> Sì, cambiamenti limitati</label>
+                <label class="option-label"><input type="radio" name="Q9" value="Non ho notato cambiamenti significativi"> Non ho notato cambiamenti significativi</label>
+                <label class="option-label"><input type="radio" name="Q9" value="Ho osservato un peggioramento in alcuni aspetti"> Ho osservato un peggioramento in alcuni aspetti</label>
+                <label class="option-label"><input type="radio" name="Q9" value="I risultati sono stati diversi da ragazzo a ragazzo"> I risultati sono stati diversi da ragazzo a ragazzo</label>
+                <label class="option-label"><input type="radio" name="Q9" value="Non ho elementi sufficienti per valutare"> Non ho elementi sufficienti per valutare</label>
+            </div>
+        </div>
+
+        <!-- SEZIONE D -->
+        <h2>SEZIONE D — INCLUSIONE SOCIALE E CONTESTI DI FRAGILITÀ</h2>
+
+        <span class="question-title">10. Secondo te, il karate può offrire ai ragazzi che vivono situazioni di fragilità sociale o relazionale un ambiente positivo e inclusivo?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q10" value="Per nulla" required> Per nulla</label>
+            <label class="option-label"><input type="radio" name="Q10" value="Poco"> Poco</label>
+            <label class="option-label"><input type="radio" name="Q10" value="Abbastanza"> Abbastanza</label>
+            <label class="option-label"><input type="radio" name="Q10" value="Molto"> Molto</label>
+            <label class="option-label"><input type="radio" name="Q10" value="Non so valutare"> Non so valutare</label>
+        </div>
+
+        <span class="question-title">11. Quanto spesso hai osservato miglioramenti nella partecipazione al gruppo o nella capacità di collaborare con gli altri?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q11" value="Mai" required> Mai</label>
+            <label class="option-label"><input type="radio" name="Q11" value="Raramente"> Raramente</label>
+            <label class="option-label"><input type="radio" name="Q11" value="Talvolta"> Talvolta</label>
+            <label class="option-label"><input type="radio" name="Q11" value="Spesso"> Spesso</label>
+            <label class="option-label"><input type="radio" name="Q11" value="Molto spesso"> Molto spesso</label>
+            <label class="option-label"><input type="radio" name="Q11" value="Non ho esperienza diretta"> Non ho esperienza diretta</label>
+        </div>
+
+        <span class="question-title">12. Hai osservato casi in cui la palestra è diventata per un ragazzo un punto di riferimento positivo?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q12" value="Sì, in alcuni casi" required> Sì, in alcuni casi</label>
+            <label class="option-label"><input type="radio" name="Q12" value="Sì, in diversi casi"> Sì, in diversi casi</label>
+            <label class="option-label"><input type="radio" name="Q12" value="No"> No</label>
+            <label class="option-label"><input type="radio" name="Q12" value="Non ho esperienza diretta"> Non ho esperienza diretta</label>
+        </div>
+
+        <span class="question-title">13. Quale fattore ritieni più importante per favorire un’esperienza sportiva inclusiva?</span>
+        <p class="instruction">Scegli una sola risposta.</p>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q13" value="La qualità della relazione con l’istruttore" required> La qualità della relazione con l’istruttore</label>
+            <label class="option-label"><input type="radio" name="Q13" value="La chiarezza delle regole e l’organizzazione dell’attività"> La chiarezza delle regole e l’organizzazione dell’attività</label>
+            <label class="option-label"><input type="radio" name="Q13" value="Il clima positivo del gruppo"> Il clima positivo del gruppo</label>
+            <label class="option-label"><input type="radio" name="Q13" value="La continuità della partecipazione sportiva"> La continuità della partecipazione sportiva</label>
+            <label class="option-label"><input type="radio" name="Q13" value="La collaborazione tra palestra, famiglia e scuola"> La collaborazione tra palestra, famiglia e scuola</label>
+            <label class="option-label"><input type="radio" name="Q13" value="L’accessibilità economica e organizzativa dell’attività"> L’accessibilità economica e organizzativa dell’attività</label>
+            <label class="option-label"><input type="radio" name="Q13" value="La formazione educativa dell’istruttore"> La formazione educativa dell’istruttore</label>
+            <label class="option-label"><input type="radio" name="Q13" value="Non so valutare"> Non so valutare</label>
+        </div>
+
+        <span class="question-title">14. Secondo te, un ambiente sportivo educativo può offrire ai ragazzi in difficoltà opportunità positive che contribuiscano a ridurre il rischio di isolamento o di coinvolgimento in contesti problematici?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q14" value="Per nulla" required> Per nulla</label>
+            <label class="option-label"><input type="radio" name="Q14" value="Poco"> Poco</label>
+            <label class="option-label"><input type="radio" name="Q14" value="Abbastanza"> Abbastanza</label>
+            <label class="option-label"><input type="radio" name="Q14" value="Molto"> Molto</label>
+            <label class="option-label"><input type="radio" name="Q14" value="Non so valutare"> Non so valutare</label>
+        </div>
+
+        <span class="question-title">15. Quanto ritieni importante la collaborazione tra istruttori, famiglie, scuola e altre figure educative per sostenere i ragazzi in situazioni complesse?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q15" value="Per nulla importante" required> Per nulla importante</label>
+            <label class="option-label"><input type="radio" name="Q15" value="Poco importante"> Poco importante</label>
+            <label class="option-label"><input type="radio" name="Q15" value="Abbastanza importante"> Abbastanza importante</label>
+            <label class="option-label"><input type="radio" name="Q15" value="Molto importante"> Molto importante</label>
+            <label class="option-label"><input type="radio" name="Q15" value="Fondamentale"> Fondamentale</label>
+            <label class="option-label"><input type="radio" name="Q15" value="Non so valutare"> Non so valutare</label>
+        </div>
+
+        <!-- SEZIONE E -->
+        <h2>SEZIONE E — ESPERIENZA CONCRETA</h2>
+
+        <span class="question-title">16. Puoi descrivere brevemente un’esperienza, osservata direttamente, in cui il karate ha favorito la fiducia, l’autocontrollo, la partecipazione o l’integrazione di un ragazzo?</span>
+        <p class="instruction">Risposta facoltativa. Non inserire nomi, luoghi specifici, diagnosi o altri dettagli identificativi.</p>
+        <textarea name="Q16" placeholder="Scrivi qui la tua esperienza..."></textarea>
+
+        <span class="question-title">17. Quali aspetti possono rendere difficile raggiungere questi obiettivi educativi?</span>
+        <p class="instruction">Puoi selezionare più risposte.</p>
+        <div class="option-group">
+            <label class="option-label"><input type="checkbox" name="Q17[]" value="Scarsa continuità nella frequenza"> Scarsa continuità nella frequenza</label>
+            <label class="option-label"><input type="checkbox" name="Q17[]" value="Difficoltà nel coinvolgimento della famiglia"> Difficoltà nel coinvolgimento della famiglia</label>
+            <label class="option-label"><input type="checkbox" name="Q17[]" value="Numero elevato di partecipanti rispetto agli istruttori"> Numero elevato di partecipanti rispetto agli istruttori</label>
+            <label class="option-label"><input type="checkbox" name="Q17[]" value="Formazione educativa insufficiente dell’istruttore"> Formazione educativa insufficiente dell’istruttore</label>
+            <label class="option-label"><input type="checkbox" name="Q17[]" value="Difficoltà economiche o organizzative"> Difficoltà economiche o organizzative</label>
+            <label class="option-label"><input type="checkbox" name="Q17[]" value="Scarsa collaborazione con scuola o altre figure educative"> Scarsa collaborazione con scuola o altre figure educative</label>
+            <label class="option-label"><input type="checkbox" name="Q17[]" value="Bisogni individuali che richiedono un supporto specialistico"> Bisogni individuali che richiedono un supporto specialistico</label>
+            <label class="option-label"><input type="checkbox" name="Q17[]" value="Non ho riscontrato particolari difficoltà"> Non ho riscontrato particolari difficoltà</label>
+            <label class="option-label"><input type="checkbox" id="q17_altro_check" name="Q17[]" value="Altro"> Altro:</label>
+            <input type="text" id="q17_altro_text" name="Q17_altro" placeholder="Specifica altre difficoltà..." style="margin-top: 5px;">
+        </div>
+
+        <!-- SEZIONE F -->
+        <h2>SEZIONE F — VALUTAZIONE FINALE</h2>
+
+        <span class="question-title">18. In generale, quanto ritieni che il karate, se insegnato con un approccio educativo e inclusivo, possa contribuire alla crescita globale di bambini e adolescenti?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q18" value="Per nulla" required> Per nulla</label>
+            <label class="option-label"><input type="radio" name="Q18" value="Poco"> Poco</label>
+            <label class="option-label"><input type="radio" name="Q18" value="Abbastanza"> Abbastanza</label>
+            <label class="option-label"><input type="radio" name="Q18" value="Molto"> Molto</label>
+            <label class="option-label"><input type="radio" name="Q18" value="Non so valutare"> Non so valutare</label>
+        </div>
+
+        <span class="question-title">19. Quanto ritieni utile che gli istruttori ricevano una formazione specifica sugli aspetti emotivi, relazionali e sociali dello sviluppo giovanile?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q19" value="Per nulla utile" required> Per nulla utile</label>
+            <label class="option-label"><input type="radio" name="Q19" value="Poco utile"> Poco utile</label>
+            <label class="option-label"><input type="radio" name="Q19" value="Abbastanza utile"> Abbastanza utile</label>
+            <label class="option-label"><input type="radio" name="Q19" value="Molto utile"> Molto utile</label>
+            <label class="option-label"><input type="radio" name="Q19" value="Fondamentale"> Fondamentale</label>
+            <label class="option-label"><input type="radio" name="Q19" value="Non so valutare"> Non so valutare</label>
+        </div>
+
+        <!-- SEZIONE G -->
+        <h2>SEZIONE G — APPROFONDIMENTO SULLA DIDATTICA DEL KARATE</h2>
+
+        <span class="question-title">20. Come organizzi la lezione di karate per bambini e adolescenti?</span>
+        <p class="instruction">Seleziona fino a 3 risposte.</p>
+        <div class="option-group">
+            <label class="option-label"><input type="checkbox" name="Q20[]" value="Dimostrazione pratica del gesto tecnico" onclick="limitCheckboxes('Q20[]', 3)"> Dimostrazione pratica del gesto tecnico</label>
+            <label class="option-label"><input type="checkbox" name="Q20[]" value="Scomposizione del movimento in fasi più semplici" onclick="limitCheckboxes('Q20[]', 3)"> Scomposizione del movimento in fasi più semplici</label>
+            <label class="option-label"><input type="checkbox" name="Q20[]" value="Ripetizione progressiva degli esercizi" onclick="limitCheckboxes('Q20[]', 3)"> Ripetizione progressiva degli esercizi</label>
+            <label class="option-label"><input type="checkbox" name="Q20[]" value="Giochi ed esercizi ludici" onclick="limitCheckboxes('Q20[]', 3)"> Giochi ed esercizi ludici</label>
+            <label class="option-label"><input type="checkbox" name="Q20[]" value="Esercizi a coppie per favorire rispetto e collaborazione" onclick="limitCheckboxes('Q20[]', 3)"> Esercizi a coppie per favorire rispetto e collaborazione</label>
+            <label class="option-label"><input type="checkbox" name="Q20[]" value="Adattamento delle attività alle capacità individuali" onclick="limitCheckboxes('Q20[]', 3)"> Adattamento delle attività alle capacità individuali</label>
+            <label class="option-label"><input type="checkbox" name="Q20[]" value="Altre modalità" onclick="limitCheckboxes('Q20[]', 3)"> Altre modalità</label>
+        </div>
+
+        <span class="question-title">21. Come intervieni quando un ragazzo manifesta impulsività, frustrazione o difficoltà nel rispettare le regole?</span>
+        <p class="instruction">Seleziona fino a 2 risposte.</p>
+        <div class="option-group">
+            <label class="option-label"><input type="checkbox" name="Q21[]" value="Richiamo e spiegazione della regola" onclick="limitCheckboxes('Q21[]', 2)"> Richiamo e spiegazione della regola</label>
+            <label class="option-label"><input type="checkbox" name="Q21[]" value="Pausa e ripresa dell’attività dopo aver chiarito il comportamento atteso" onclick="limitCheckboxes('Q21[]', 2)"> Pausa e ripresa dell’attività dopo aver chiarito il comportamento atteso</label>
+            <label class="option-label"><input type="checkbox" name="Q21[]" value="Esercizi mirati al controllo del gesto e della distanza" onclick="limitCheckboxes('Q21[]', 2)"> Esercizi mirati al controllo del gesto e della distanza</label>
+            <label class="option-label"><input type="checkbox" name="Q21[]" value="Feedback individuale e valorizzazione dei progressi" onclick="limitCheckboxes('Q21[]', 2)"> Feedback individuale e valorizzazione dei progressi</label>
+            <label class="option-label"><input type="checkbox" name="Q21[]" value="Attività cooperative con i compagni" onclick="limitCheckboxes('Q21[]', 2)"> Attività cooperative con i compagni</label>
+            <label class="option-label"><input type="checkbox" name="Q21[]" value="Confronto con la famiglia o con altre figure educative, quando opportuno" onclick="limitCheckboxes('Q21[]', 2)"> Confronto con la famiglia o con altre figure educative, quando opportuno</label>
+            <label class="option-label"><input type="checkbox" name="Q21[]" value="Non ho esperienza diretta di queste situazioni" onclick="limitCheckboxes('Q21[]', 2)"> Non ho esperienza diretta di queste situazioni</label>
+        </div>
+
+        <span class="question-title">22. Come valuti i progressi di un ragazzo durante il percorso di apprendimento?</span>
+        <p class="instruction">Seleziona fino a 3 risposte.</p>
+        <div class="option-group">
+            <label class="option-label"><input type="checkbox" name="Q22[]" value="Osservazione durante le lezioni" onclick="limitCheckboxes('Q22[]', 3)"> Osservazione durante le lezioni</label>
+            <label class="option-label"><input type="checkbox" name="Q22[]" value="Confronto tra prestazioni iniziali e successive" onclick="limitCheckboxes('Q22[]', 3)"> Confronto tra prestazioni iniziali e successive</label>
+            <label class="option-label"><input type="checkbox" name="Q22[]" value="Verifica dell’esecuzione tecnica e del controllo motorio" onclick="limitCheckboxes('Q22[]', 3)"> Verifica dell’esecuzione tecnica e del controllo motorio</label>
+            <label class="option-label"><input type="checkbox" name="Q22[]" value="Osservazione del rispetto delle regole e della gestione delle emozioni" onclick="limitCheckboxes('Q22[]', 3)"> Osservazione del rispetto delle regole e della gestione delle emozioni</label>
+            <label class="option-label"><input type="checkbox" name="Q22[]" value="Feedback del ragazzo e confronto individuale" onclick="limitCheckboxes('Q22[]', 3)"> Feedback del ragazzo e confronto individuale</label>
+            <label class="option-label"><input type="checkbox" name="Q22[]" value="Confronto con la famiglia, quando opportuno" onclick="limitCheckboxes('Q22[]', 3)"> Confronto con la famiglia, quando opportuno</label>
+            <label class="option-label"><input type="checkbox" name="Q22[]" value="Non utilizzo criteri strutturati di valutazione" onclick="limitCheckboxes('Q22[]', 3)"> Non utilizzo criteri strutturati di valutazione</label>
+        </div>
+
+        <span class="question-title">23. Quanto adatti il metodo d’insegnamento alle caratteristiche e alle difficoltà dei singoli ragazzi?</span>
+        <div class="option-group">
+            <label class="option-label"><input type="radio" name="Q23" value="Mai" required> Mai</label>
+            <label class="option-label"><input type="radio" name="Q23" value="Raramente"> Raramente</label>
+            <label class="option-label"><input type="radio" name="Q23" value="Talvolta"> Talvolta</label>
+            <label class="option-label"><input type="radio" name="Q23" value="Spesso"> Spesso</label>
+            <label class="option-label"><input type="radio" name="Q23" value="Sempre"> Sempre</label>
+            <label class="option-label"><input type="radio" name="Q23" value="Non so valutare"> Non so valutare</label>
+        </div>
+
+        <p style="text-align: center; margin-top: 30px; font-weight: 500;">Grazie per il tempo dedicato e per il contributo alla ricerca.</p>
 
         <button type="submit">Invia Questionario</button>
 
@@ -349,38 +526,30 @@
 </div>
 
 <script>
-    // Configura i comportamenti dinamici del form
-    function setupDropdownWithOther(selectId, boxId, inputId) {
-        const selectEl = document.getElementById(selectId);
-        const boxEl = document.getElementById(boxId);
-        const inputEl = document.getElementById(inputId);
-
-        selectEl.addEventListener('change', function() {
-            if (this.value === 'Altro') {
-                boxEl.classList.add('show');
-                inputEl.setAttribute('required', 'true');
-            } else {
-                boxEl.classList.remove('show');
-                inputEl.removeAttribute('required');
-                inputEl.value = ''; // Pulisci se l'utente cambia idea
-            }
-        });
+    // Gestione della visualizzazione condizionale per le domande 8 e 9
+    function toggleGroup7(show) {
+        const sec = document.getElementById('section_8_9');
+        if (show) {
+            sec.classList.remove('hidden');
+        } else {
+            sec.classList.add('hidden');
+            // Uncheck tutti i radio/checkbox all'interno della sezione nascosta
+            const inputs = sec.querySelectorAll('input');
+            inputs.forEach(input => {
+                if(input.type === 'checkbox' || input.type === 'radio') input.checked = false;
+                if(input.type === 'text') input.value = '';
+            });
+        }
     }
 
-    // Inizializza le due tendine
-    setupDropdownWithOther('genere_select', 'genere_altro_box', 'genere_altro_input');
-    setupDropdownWithOther('ruolo_select', 'ruolo_altro_box', 'ruolo_altro_input');
-
-    // Prima di inviare, popola i campi nascosti (quelli che Apps Script andrà a leggere)
-    document.getElementById('surveyForm').addEventListener('submit', function() {
-        const genSelect = document.getElementById('genere_select').value;
-        const genInput = document.getElementById('genere_altro_input').value;
-        document.getElementById('genere_final').value = genSelect === 'Altro' ? genInput : genSelect;
-
-        const ruoloSelect = document.getElementById('ruolo_select').value;
-        const ruoloInput = document.getElementById('ruolo_altro_input').value;
-        document.getElementById('ruolo_final').value = ruoloSelect === 'Altro' ? ruoloInput : ruoloSelect;
-    });
+    // Limitazione del numero massimo di opzioni selezionabili nei checkbox
+    function limitCheckboxes(name, max) {
+        const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+        if (checkboxes.length > max) {
+            event.target.checked = false;
+            alert(`Puoi selezionare al massimo ${max} opzioni per questa domanda.`);
+        }
+    }
 </script>
 
 </body>
